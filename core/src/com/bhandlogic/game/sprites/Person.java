@@ -10,9 +10,8 @@ import com.badlogic.gdx.math.Vector3;
  */
 public class Person
 {
+	public static final int PERSON_Y_OFFSET = -5;
 	private static int MOVEMENT = 125;
-	public static final float SCALE_X = (float) 0.4;
-	public static final float SCALE_Y = (float) 0.4;
 	private static final String TEXTURE_FILE_NAME = "person_new.png";
 	private static final int FRAME_COUNT = 3;
 	private static final float CYCLE_TIME = 0.6f;
@@ -29,7 +28,7 @@ public class Person
 		position = new Vector3(x, y, 0);
 		velocity = new Vector3(0, 0, 0);
 		texture = new Texture(TEXTURE_FILE_NAME);
-		personAnimation = new Animation(new TextureRegion(texture, texture.getWidth() / 6, texture.getHeight()), FRAME_COUNT, CYCLE_TIME);
+		personAnimation = new Animation(new TextureRegion(texture, texture.getWidth() / 2, texture.getHeight()), FRAME_COUNT, CYCLE_TIME);
 		bounds = new Rectangle(x, y, texture.getWidth() / 6, texture.getHeight());
 	}
 	public void update(float dt)
@@ -44,10 +43,6 @@ public class Person
 	{
 		return personAnimation.getFrame();
 	}
-	public Rectangle getBounds()
-	{
-		return bounds;
-	}
 	public Vector3 getPosition()
 	{
 		return position;
@@ -57,4 +52,8 @@ public class Person
 		texture.dispose();
 	}
 
+	public void jump()
+	{
+		position.y += 30;
+	}
 }

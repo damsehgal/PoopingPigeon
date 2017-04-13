@@ -54,7 +54,7 @@ public class BirdPoop
         if(flag){
             if (!(position.y <= POOP_GROUND_OFFSET))
             {
-                position.y -= dt * position.y * SCALE_VELOCITY_Y;
+                position.y -= dt * (Khamba.KHAMBA_HEIGHT*2 - position.y) * SCALE_VELOCITY_Y;
             }
             if (position.y <= POOP_GROUND_OFFSET && !girChukiH)
             {

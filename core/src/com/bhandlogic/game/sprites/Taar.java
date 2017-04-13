@@ -17,7 +17,7 @@ public class Taar
     public static final int TAAR_OFFSET = 250;
     public static final int TAAR_SPACING = 0;
     public static final int BIRD_COUNT = 6;
-    public static final int NEXT_TAAR_POSITION = TAAR_WIDTH + TAAR_SPACING * Khamba.KHAMBA_COUNT;
+    public static final int NEXT_TAAR_POSITION = (TAAR_WIDTH + TAAR_SPACING )* Khamba.KHAMBA_COUNT;
     private static final String TEXTURE_FILE_NAME = "taar.png";
 
     private Texture texture;
@@ -36,6 +36,23 @@ public class Taar
                     i * TAAR_WIDTH / BIRD_COUNT,
                     Khamba.KHAMBA_HEIGHT - birdDistances(i) * TAAR_HEIGHT
             ));
+        }
+    }
+
+    public Taar(float x)
+    {
+        texture = new Texture(TEXTURE_FILE_NAME);
+        position = new Vector3(x, TAAR_OFFSET, 0);
+        birdArray = new Array<Bird>();
+        Random rand = new Random();
+        for (int i = 0; i < 5; i++)
+        {
+            birdArray.add(new Bird(x, i));
+        }
+        for (int i = 0; i < rand.nextInt(3) + 2; i++)
+        {
+            int index = rand.nextInt(5);
+            birdArray.get(index).setVisible(true);
         }
     }
 
@@ -74,16 +91,17 @@ public class Taar
         return position.x + TAAR_WIDTH;
     }
 
-    public Taar(float x)
-    {
-        texture = new Texture(TEXTURE_FILE_NAME);
-        position = new Vector3(x, TAAR_OFFSET, 0);
-        birdArray = new Array<Bird>();
+    public void refreshBirds(){
         Random rand = new Random();
+        for (Bird bird : birdArray)
+        {
+            bird.setVisible(false);
+        }
         for (int i = 0; i < rand.nextInt(3) + 2; i++)
         {
             int index = rand.nextInt(5);
-            birdArray.add(new Bird(x, index));
+            Bird bird = birdArray.get(index);
+            bird.setVisible(true);
         }
     }
 

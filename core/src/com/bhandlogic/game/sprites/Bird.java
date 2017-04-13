@@ -9,11 +9,17 @@ import com.badlogic.gdx.math.Vector2;
 public class Bird
 {
     private static final String TEXTURE_FILE_NAME = "bird.png";
-    public final Vector2 posRelativeToTaar;
-
     Texture texture;
     Vector2 position;
     BirdPoop birdPoop;
+    boolean visible;
+
+    public final Vector2 posRelativeToTaar;
+
+    public boolean isVisible()
+    {
+        return visible;
+    }
 
     public Bird(float distanceFromPole, int index)
     {
@@ -54,5 +60,10 @@ public class Bird
     {
         texture.dispose();
         birdPoop.dispose();
+    }
+
+    public void setVisible(boolean visible)
+    {
+        this.visible = visible;
     }
 }
